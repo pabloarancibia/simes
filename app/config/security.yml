@@ -22,3 +22,7 @@ security:
 
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
             #form_login: ~
+encoders:
+    UserBundle/Entity/User:
+        algoritm: bcrypt
+        cost: 12

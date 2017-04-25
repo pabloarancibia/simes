@@ -3,7 +3,7 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User Implements UserInterface
 {
     /**
      * @var int
@@ -319,4 +319,19 @@ class User
 	{
 		$this->updatedAt=new \DateTime();
 	}
+	
+	 public function getRoles()
+     {
+         
+     }
+     
+     public function getSalt()
+     {
+         
+     }
+     
+     public function eraseCredentials()
+     {
+         
+     }
 }

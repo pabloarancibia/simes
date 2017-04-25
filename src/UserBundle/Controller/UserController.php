@@ -48,6 +48,16 @@ class UserController extends Controller
 			$em->persist($user);
 			$em->flush();
 			
+			 //obtenemos el password ingresado en el formulario:
+            $password = $form->get('password')->getData();
+            //traigo el encoder para codificar el password
+            $encoder = $this->container->get('security.password_encoder');
+            //codifico el pass
+            $encoded = $encoder->encodePassword($user, $password);
+            //almacenamos el password ya encriptado
+            $user->setPassword($encoded);
+
+			
 			return $this->redirectToRoute('user_index');
 		}
 			return $this->render('UserBundle:User:add.html.twig', array ('form'=>$form->createView()));
