@@ -5,12 +5,16 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * User
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+  * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User Implements UserInterface
 {
@@ -66,8 +70,7 @@ class User Implements UserInterface
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=50)
-	* @Assert\NotBlank()
-	* @Assert\Choice(choices = {"ROLE_ADMIN", "ROLE_USER"})
+	 * @Assert\Choice(choices = {"ROLE_ADMIN", "ROLE_USER"})
      */
     private $role;
 

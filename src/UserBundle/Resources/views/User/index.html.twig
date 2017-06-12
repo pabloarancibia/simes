@@ -2,6 +2,14 @@
 
 {% block body %}
    {{ parent() }}
+   
+  <!-- {% for flashMessage in app.session.flashbag.get('mensaje') %}
+    	<div class="alert alert-success" role="alert">
+			<div class="container">{{ flashMessage }}</div>
+    	</div>
+    {% endfor %} -->
+{{include ('UserBundle:User:messages/success.html.twig')}}
+
 <h2>USUARIOS</h2>
 
 <table border="1">

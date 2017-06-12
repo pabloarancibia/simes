@@ -40,11 +40,11 @@ class UserController extends Controller
 	public function createAction (Request $request)
 	{
 		$user = new User();
-		$form = createCreateForm($user);
+		$form = $this->createCreateForm($user);
 		$form -> handleRequest($request);
 		if ($form->isValid())
 		{
-			$em=$this->getDoctrine->getManager();
+			$em=$this->getDoctrine()->getManager();
 			$em->persist($user);
 			$em->flush();
 			
@@ -56,6 +56,12 @@ class UserController extends Controller
             $encoded = $encoder->encodePassword($user, $password);
             //almacenamos el password ya encriptado
             $user->setPassword($encoded);
+			
+			 // añadimos un msje que indique lo siguiente, primero creamos una variable traducible para después mostrar la variable
+            $successMessage = ('Usuario creado con éxito..');
+            //mostramos el msj desde la variable
+            $this->addFlash('mensaje', $successMessage);
+
 
 			
 			return $this->redirectToRoute('user_index');
