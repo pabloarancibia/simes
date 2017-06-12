@@ -10,13 +10,26 @@ use UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
          $em = $this->getDoctrine()->getManager();
          
-         $users = $em->getRepository('UserBundle:User')->findAll();
+         //$users = $em->getRepository('UserBundle:User')->findAll();
+		 $dql= "SELECT u FROM PAUserBundle:User u ORDER BY u.id DESC";
+         $users = $em->createQuery($dql);
+         
+         $paginator = $this->get('knp_paginator');
+         $pagination = $paginator->paginate(
+             $users,
+             $request->query->getInt('page',1),
+             5
+             
+             );
+         
+         return $this->render('PAUserBundle:User:index.html.twig', array ('pagination'=>$pagination));
 
-         return $this->render('UserBundle:User:index.html.twig', array ('users'=>$users));
+
+         //return $this->render('UserBundle:User:index.html.twig', array ('users'=>$users));
     }
 	
 	public function addAction()
