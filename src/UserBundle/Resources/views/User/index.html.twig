@@ -8,7 +8,7 @@
 			<div class="container">{{ flashMessage }}</div>
     	</div>
     {% endfor %} -->
-{{include ('UserBundle:User:messages/success.html.twig')}}
+{{include ('UserBundle:messages:success.html.twig')}}
 
 <h2>USUARIOS</h2>
 
@@ -22,7 +22,7 @@
         <!-- <th>Created</th> -->
         <!-- <th>Updated</th> -->
         <!-- <th>Actions</th> -->
-		<th>{{knp_paginator_sortable(pagination,'Username'|trans, 'u.username')}}</th>
+		<th>{{knp_pagination_sortable(pagination,'Username', 'u.username')}}</th>
         <th>{{knp_pagination_sortable(pagination,'Username'|trans, 'u.username')}}</th>
         <th>{{knp_pagination_sortable(pagination,'First Name'|trans, 'u.firstname')}}</th>
         <th>{{knp_pagination_sortable(pagination,'Last Name'|trans, 'u.lastname')}}</th>
@@ -44,7 +44,7 @@
         <td>{{user.updatedAt|date('d-m-Y H:i')}}</td>
         <td>
             <a href="#">Ver</a>
-            <a href="#">Editar</a>
+            <a href="{{ path('user_edit', {id: user.id}) }}" class="btn btn-sm btn-primary">Editar</a>
             <a href="#">Eliminar</a>
         </td>
     </tr>
